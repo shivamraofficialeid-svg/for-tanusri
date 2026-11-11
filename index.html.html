@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For My Tanusri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#050816; --bg2:#0a1030; --bg3:#12081f;
+  --crimson:#ff1f4b; --rose:#f3b4a4; --rosegold:#e8a598; --cyan:#35e8ff;
+  --text:#f6eef0; --muted:#b9aab4;
+  --glass:rgba(255,255,255,.06); --glass-border:rgba(243,180,164,.25);
+  color-scheme: dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{
+  font-family:'Montserrat',system-ui,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(53,232,255,.10), transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(255,31,75,.14), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));
+  background-attachment:fixed;
+  overflow-x:hidden;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:50;pointer-events:none}
+main{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  padding:48px 20px 64px;
+  gap:28px;text-align:center;
+}
+.eyebrow{
+  letter-spacing:.45em;font-size:.72rem;font-weight:300;
+  color:var(--cyan);text-transform:uppercase;
+  text-shadow:0 0 12px rgba(53,232,255,.7);
+  opacity:0;animation:rise 1.2s .2s forwards;
+}
+
+/* Heart */
+.heart-wrap{
+  position:relative;width:min(60vw,260px);aspect-ratio:1;
+  display:grid;place-items:center;
+  opacity:0;animation:rise 1.4s .4s forwards;
+}
+.ring{
+  position:absolute;inset:-8%;border-radius:50%;
+  border:1px solid rgba(53,232,255,.45);
+  box-shadow:0 0 25px rgba(53,232,255,.35), inset 0 0 25px rgba(53,232,255,.2);
+  animation:spin 18s linear infinite;
+  border-top-color:transparent;border-bottom-color:transparent;
+}
+.ring.r2{inset:-18%;border-color:rgba(232,165,152,.35);
+  box-shadow:0 0 20px rgba(232,165,152,.25);
+  animation-duration:28s;animation-direction:reverse;
+  border-left-color:transparent;border-right-color:transparent}
+.ring.r3{inset:-28%;border:1px dashed rgba(53,232,255,.18);box-shadow:none;animation-duration:40s}
+.glow{
+  position:absolute;inset:10%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,31,75,.55),transparent 70%);
+  filter:blur(28px);animation:beat 1.6s ease-in-out infinite;
+}
+svg.heart{
+  position:relative;width:78%;height:78%;
+  animation:beat 1.6s ease-in-out infinite;
+  filter:drop-shadow(0 0 14px rgba(255,31,75,.9)) drop-shadow(0 0 34px rgba(255,31,75,.6));
+  cursor:pointer;
+}
+@keyframes beat{
+  0%,100%{transform:scale(1)}
+  12%{transform:scale(1.10)}
+  24%{transform:scale(1)}
+  36%{transform:scale(1.07)}
+  50%{transform:scale(1)}
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* Headline */
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:700;font-style:italic;
+  font-size:clamp(2.6rem,9vw,5.2rem);line-height:1.05;
+  background:linear-gradient(100deg,var(--rose),var(--crimson) 35%,var(--cyan) 70%,var(--rose));
+  background-size:250% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 18px rgba(255,31,75,.35));
+  animation:rise 1.4s .7s forwards, shine 8s linear infinite;
+  opacity:0;
+}
+@keyframes shine{to{background-position:250% center}}
+.sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.3rem,4.6vw,2rem);font-weight:700;
+  color:var(--rose);
+  text-shadow:0 0 20px rgba(232,165,152,.4);
+  opacity:0;animation:rise 1.4s 1s forwards;
+  max-width:30ch;
+}
+.sub span{display:block;font-weight:500;font-style:italic;color:var(--text);font-size:.85em;margin-top:.3em}
+
+/* Quote */
+.quote{
+  position:relative;max-width:700px;width:100%;
+  padding:38px clamp(22px,5vw,48px);
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:24px;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 20px 60px rgba(0,0,0,.5), 0 0 40px rgba(255,31,75,.12), inset 0 1px 0 rgba(255,255,255,.12);
+  opacity:0;animation:rise 1.4s 1.3s forwards;
+}
+.quote::before,.quote::after{
+  content:"";position:absolute;width:46px;height:46px;border-radius:50%;
+  background:radial-gradient(circle,rgba(53,232,255,.6),transparent 70%);
+  filter:blur(8px);
+}
+.quote::before{top:-14px;left:-14px}
+.quote::after{bottom:-14px;right:-14px;background:radial-gradient(circle,rgba(255,31,75,.6),transparent 70%)}
+.qmark{
+  font-family:'Cormorant Garamond',serif;font-size:4rem;line-height:.4;
+  color:var(--cyan);text-shadow:0 0 16px rgba(53,232,255,.8);
+  display:block;margin-bottom:14px;
+}
+.quote p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.15rem,3.6vw,1.55rem);line-height:1.65;font-weight:500;
+  color:var(--text);
+}
+.quote p b{
+  font-weight:700;
+  background:linear-gradient(90deg,var(--crimson),var(--rose));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sig{
+  margin-top:22px;font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--cyan);text-shadow:0 0 10px rgba(53,232,255,.6);
+}
+
+/* Button */
+.btn{
+  position:relative;
+  font:600 .85rem 'Montserrat',sans-serif;letter-spacing:.18em;text-transform:uppercase;
+  color:#fff;cursor:pointer;
+  padding:18px 34px;border-radius:999px;border:1px solid rgba(255,255,255,.25);
+  background:linear-gradient(120deg,var(--crimson),#b0123a 55%,#7a1d5a);
+  box-shadow:0 0 24px rgba(255,31,75,.55), 0 0 60px rgba(255,31,75,.25), inset 0 1px 0 rgba(255,255,255,.3);
+  transition:transform .25s, box-shadow .25s;
+  opacity:0;animation:rise 1.4s 1.6s forwards;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn::after{
+  content:"";position:absolute;inset:-5px;border-radius:999px;
+  border:1px solid rgba(53,232,255,.5);
+  box-shadow:0 0 16px rgba(53,232,255,.4);
+  animation:halo 2.4s ease-in-out infinite;
+}
+@keyframes halo{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}}
+.btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 0 34px rgba(255,31,75,.8),0 0 80px rgba(255,31,75,.35)}
+.btn:active{transform:scale(.97)}
+.note{
+  min-height:1.6em;font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.2rem;color:var(--rose);transition:opacity .5s;
+}
+footer{
+  font-size:.7rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin-top:8px;
+}
+footer em{color:var(--crimson);font-style:normal}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important}
+  .eyebrow,.heart-wrap,h1,.sub,.quote,.btn{opacity:1}
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<canvas id="fx"></canvas>
+
+<main>
+  <div class="eyebrow">Arc Reactor · Online</div>
+
+  <div class="heart-wrap" aria-hidden="true">
+    <div class="ring r3"></div>
+    <div class="ring r2"></div>
+    <div class="ring"></div>
+    <div class="glow"></div>
+    <svg class="heart" id="heart" viewBox="0 0 100 90" role="img" aria-label="A beating heart">
+      <defs>
+        <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ff5a7a"/>
+          <stop offset=".6" stop-color="#ff1f4b"/>
+          <stop offset="1" stop-color="#a50d35"/>
+        </linearGradient>
+        <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#35e8ff"/>
+          <stop offset="1" stop-color="#f3b4a4"/>
+        </linearGradient>
+      </defs>
+      <path d="M50 84 C12 56 4 38 4 26 C4 13 14 5 26 5 C36 5 45 11 50 20 C55 11 64 5 74 5 C86 5 96 13 96 26 C96 38 88 56 50 84 Z" fill="url(#hg)" opacity=".9"/>
+      <path d="M50 76 C18 52 11 37 11 27 C11 17 19 11 27 11 C36 11 44 17 50 27 C56 17 64 11 73 11 C81 11 89 17 89 27 C89 37 82 52 50 76 Z" fill="none" stroke="url(#rg)" stroke-width="1.6"/>
+      <path d="M50 66 C26 48 20 37 20 29 C20 22 25 18 31 18 C38 18 45 23 50 32 C55 23 62 18 69 18 C75 18 80 22 80 29 C80 37 74 48 50 66 Z" fill="none" stroke="#35e8ff" stroke-width=".8" stroke-dasharray="2 3" opacity=".8"/>
+      <circle cx="50" cy="38" r="5" fill="#fff" opacity=".9"/>
+      <circle cx="50" cy="38" r="9" fill="none" stroke="#35e8ff" stroke-width="1" opacity=".9"/>
+    </svg>
+  </div>
+
+  <h1>For My Tanusri</h1>
+
+  <div class="sub">I love you, Tanusri
+    <span>— Forever yours, Shivam.</span>
+  </div>
+
+  <section class="quote">
+    <span class="qmark">“</span>
+    <p>They say genius, billionaire, playboy, philanthropist… but none of that mattered until you walked into the room. You're my anchor, my peace, and the living proof that my heart actually beats. Out of all the multiverses and timelines, you're the only thing I could never live without. <b>I love you 3000, Tanusri.</b></p>
+    <div class="sig">— Shivam</div>
+  </section>
+
+  <button class="btn" id="proof" type="button">Proof That Shivam Has A Heart</button>
+  <div class="note" id="note"></div>
+
+  <footer>Made with <em>♥</em> by Shivam, for Tanusri</footer>
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dpr = Math.min(window.devicePixelRatio||1, 2);
+  var COLORS = ['#ff1f4b','#35e8ff','#f3b4a4','#ff5a7a'];
+
+  function heartPath(ctx, s){
+    ctx.beginPath();
+    ctx.moveTo(0, s*.35);
+    ctx.bezierCurveTo(-s*.1, s*.15, -s*.5, s*.1, -s*.5, -s*.15);
+    ctx.bezierCurveTo(-s*.5, -s*.4, -s*.15, -s*.5, 0, -s*.25);
+    ctx.bezierCurveTo(s*.15, -s*.5, s*.5, -s*.4, s*.5, -s*.15);
+    ctx.bezierCurveTo(s*.5, s*.1, s*.1, s*.15, 0, s*.35);
+    ctx.closePath();
+  }
+  function drawHeart(ctx, x, y, s, rot, color, alpha){
+    ctx.save();
+    ctx.translate(x,y); ctx.rotate(rot);
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.shadowColor = color; ctx.shadowBlur = s*.8;
+    heartPath(ctx, s); ctx.fill();
+    ctx.restore();
+  }
+  function setup(c){
+    var ctx = c.getContext('2d');
+    function size(){
+      c.width = innerWidth*dpr; c.height = innerHeight*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    size(); addEventListener('resize', size);
+    return ctx;
+  }
+
+  /* Ambient floating hearts */
+  var bg = document.getElementById('bg'), bctx = setup(bg);
+  var floaters = [];
+  function spawnFloater(initial){
+    return {
+      x: Math.random()*innerWidth,
+      y: initial ? Math.random()*innerHeight : innerHeight+30,
+      s: 8+Math.random()*18,
+      v: .25+Math.random()*.6,
+      sway: Math.random()*Math.PI*2,
+      swayS: .005+Math.random()*.01,
+      rot: (Math.random()-.5)*.6,
+      a: .12+Math.random()*.35,
+      c: COLORS[Math.random()*COLORS.length|0]
+    };
+  }
+  var count = Math.min(34, Math.max(14, innerWidth/40|0));
+  for(var i=0;i<count;i++) floaters.push(spawnFloater(true));
+
+  /* Burst particles */
+  var fx = document.getElementById('fx'), fctx = setup(fx);
+  var burst = [];
+  function launch(cx, cy, n){
+    for(var i=0;i<n;i++){
+      var ang = Math.random()*Math.PI*2, sp = 3+Math.random()*9;
+      var isHeart = Math.random()<.7;
+      burst.push({
+        x:cx,y:cy,
+        vx:Math.cos(ang)*sp, vy:Math.sin(ang)*sp-4,
+        s:10+Math.random()*20, rot:Math.random()*6, vr:(Math.random()-.5)*.2,
+        c: Math.random()<.5 ? '#ff1f4b' : (Math.random()<.7 ? '#35e8ff' : '#f3b4a4'),
+        life:1, decay:.004+Math.random()*.006, heart:isHeart
+      });
+    }
+  }
+  function rain(n){
+    for(var i=0;i<n;i++){
+      burst.push({
+        x:Math.random()*innerWidth, y:-20-Math.random()*200,
+        vx:(Math.random()-.5)*1.5, vy:2+Math.random()*3,
+        s:10+Math.random()*16, rot:Math.random()*6, vr:(Math.random()-.5)*.1,
+        c: Math.random()<.5 ? '#ff1f4b' : '#35e8ff',
+        life:1, decay:.003+Math.random()*.004, heart:true
+      });
+    }
+  }
+
+  function frame(){
+    bctx.clearRect(0,0,innerWidth,innerHeight);
+    floaters.forEach(function(f,i){
+      f.y -= f.v; f.sway += f.swayS;
+      var x = f.x + Math.sin(f.sway)*30;
+      drawHeart(bctx, x, f.y, f.s, f.rot+Math.sin(f.sway)*.2, f.c, f.a);
+      if(f.y < -40) floaters[i] = spawnFloater(false);
+    });
+
+    fctx.clearRect(0,0,innerWidth,innerHeight);
+    for(var i=burst.length-1;i>=0;i--){
+      var p = burst[i];
+      p.vy += .12; p.vx *= .99;
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= p.decay;
+      if(p.life<=0 || p.y>innerHeight+40){ burst.splice(i,1); continue; }
+      if(p.heart) drawHeart(fctx,p.x,p.y,p.s,p.rot,p.c,Math.min(1,p.life*1.4));
+      else {
+        fctx.save(); fctx.translate(p.x,p.y); fctx.rotate(p.rot);
+        fctx.globalAlpha = Math.min(1,p.life*1.4); fctx.fillStyle = p.c;
+        fctx.fillRect(-p.s/4,-p.s/8,p.s/2,p.s/4); fctx.restore();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  if(!reduce) requestAnimationFrame(frame);
+  else { /* still render once so effects work on click */
+    requestAnimationFrame(frame);
+  }
+
+  var lines = [
+    "Heart detected. It beats only for Tanusri. ♥",
+    "Scan complete: 100% in love, 0% doubt.",
+    "Arc reactor stable. Heart: yours, Tanusri.",
+    "I love you 3000, Tanusri. ♥",
+    "Every beat says your name."
+  ];
+  var li = 0, note = document.getElementById('note');
+  var btn = document.getElementById('proof');
+
+  function celebrate(x, y){
+    launch(x, y, 70);
+    setTimeout(function(){ launch(innerWidth*.2, innerHeight*.6, 35); }, 150);
+    setTimeout(function(){ launch(innerWidth*.8, innerHeight*.6, 35); }, 300);
+    rain(40);
+  }
+  btn.addEventListener('click', function(e){
+    var r = btn.getBoundingClientRect();
+    celebrate(r.left+r.width/2, r.top+r.height/2);
+    note.style.opacity = 0;
+    setTimeout(function(){ note.textContent = lines[li++ % lines.length]; note.style.opacity = 1; }, 200);
+  });
+  document.getElementById('heart').addEventListener('click', function(e){
+    launch(e.clientX, e.clientY, 30);
+  });
+})();
+</script>
+</body>
+</html>
